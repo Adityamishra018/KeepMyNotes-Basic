@@ -6,7 +6,7 @@ import { AuthApp, authorized } from "./auth.js"
 import bodyParser from "body-parser"
 import { rmSync } from "fs"
 
-//dotenv.config()
+dotenv.config()
 
 const app = express()
 
@@ -82,4 +82,6 @@ app.post('/edit',authorized,bodyParser.urlencoded({extended:false}),async (req,r
 })
 
 app.listen(3000)
+
+export default app
 
