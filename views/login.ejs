@@ -1,0 +1,25 @@
+<%-include("./layouts/_header") %>
+    <div class="row d-flex align-items-center justify-content-center m-0" style="height: 100vh;">
+        <div class="col-sm-4 px-3">
+            <h1 class="display-4 mb-4">KeepMyNotes</h1>
+            <% if('msg' in this && msg != "") {%>
+                <small class="text-danger my-2 d-block"><%=msg%></small>
+            <%}%>
+            <form action="/login" method="post">
+                <div class="form-group mb-3">
+                    <label for="username">Username</label>
+                    <input class="form-control" name="username" id="username" aria-describedby="userhelp"
+                        placeholder="Enter username">
+                    <small id="userhelp" class="form-text text-muted">Forgot username ?</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br/>
+                <small>Dont have an account? Register <a href="./register">here</a></small>
+            </form>
+        </div>
+    </div>
+<%-include("./layouts/_footer") %>

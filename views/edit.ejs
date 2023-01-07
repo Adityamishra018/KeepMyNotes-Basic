@@ -1,0 +1,45 @@
+<%- include("./layouts/_header.ejs") %>
+
+<div class="row mx-0 d-flex justify-content-between">
+    <div class="col-md-5">
+        <h1 class="display-3">KeepMyNotes</h1>
+    </div>
+    <div class="col-md-4 d-flex align-items-center justify-content-end" style="gap:10px 20px">
+        <h1 class="display-6 pt-2">Hello <%=user.fname%></h1>
+        <a href="/logout"><img width="42" class="pt-2" height="28" src="/static/img/logout.png" ></a>
+    </div>
+</div>
+
+<form action="/edit" method="post">
+    <div class="row mx-0 mt-3 d-flex">
+        <div class="col d-flex flex-column">
+            <h1 class="display-6" disabled value="Note Title">Title</h1>
+            <input type="number" name="id" value="<%= note.id %>" hidden/>
+            <input name="title" id="title" type="text" value="<%= note.title %>" oninput="update()">
+            <h1 class="display-6">Description</h1>
+            <textarea name="desc" id="desc" style="height: 50vh;resize: none;" oninput="update()"><%= note.desc %> </textarea>
+        </div>
+    </div>
+    
+    <div class="row m-0 mt-3">
+        <div class="col ps-3 d-flex justify-content-between">
+            <div>
+                <button disabled id="submitbtn" class="btn btn-primary">Update</button>
+            </div>
+            <a href="/home"><button type="button" class="btn btn-secondary">Home</button></a>
+        </div>
+    </div>
+</form>
+
+<script>
+    function update(){
+        let title = document.getElementById("title")
+        let desc = document.getElementById("desc")
+        if(title.value.trim() != title.defaultValue.trim() || desc.value.trim() != desc.defaultValue.trim()){
+            document.getElementById("submitbtn").disabled = false
+        }
+        else
+            document.getElementById("submitbtn").disabled = true
+    }
+</script>
+<%- include("./layouts/_footer.ejs") %>

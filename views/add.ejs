@@ -1,0 +1,30 @@
+<%- include("./layouts/_header.ejs") %>
+
+<div class="row mx-0 d-flex justify-content-between">
+    <div class="col-md-5">
+        <h1 class="display-3">KeepMyNotes</h1>
+    </div>
+    <div class="col-md-4 d-flex align-items-center justify-content-end" style="gap:10px 20px">
+        <h1 class="display-6 pt-2">Hello <%=user.fname%> </h1>
+        <a href=""><img width="42" class="pt-2" height="28" src="/static/img/logout.png" ></a>
+    </div>
+</div>
+
+<div class="row mx-0 mt-3 d-flex">
+    <% if ('msg' in this) {%>
+        <h1><%= msg %></h1>    
+    <% } %> 
+    <form class="form" action="./add" method="post">
+        <div class="col d-flex flex-column">
+            <h1 class="display-6" disabled value="Note Title">Title</h1>
+            <input type="text" name="title" value=" add a title">
+            <h1 class="display-6">Description</h1>
+            <textarea name="desc" style="height: 50vh;resize: none;"> add a description</textarea>
+            <div class="d-flex mt-2 justify-content-between">
+                <button class="btn btn-primary">Submit</button>
+                <a href="./home"><button type="button" class="btn btn-secondary">Home</button></a>
+            </div>
+        </div>
+    </form>
+</div>
+<%- include("./layouts/_footer.ejs") %>
