@@ -6,7 +6,7 @@ import dateJs from "date.js"
 import { MongoClient } from "mongodb"
 import dotenv from "dotenv"
 
-dotenv.config()
+//dotenv.config()
 
 const AuthApp = express.Router()
 

@@ -5,7 +5,8 @@ import path from "path"
 import { AuthApp, authorized } from "./auth.js"
 import bodyParser from "body-parser"
 import { rmSync } from "fs"
-dotenv.config()
+
+//dotenv.config()
 
 const app = express()
 
