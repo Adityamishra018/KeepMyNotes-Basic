@@ -66,7 +66,7 @@ AuthApp.post('/login', bodyParser.urlencoded({ extended: false }), async (req, r
 AuthApp.get('/logout',authorized,async (req,res)=>{
     let sessionId = req.headers.cookie.split('=')[1]
     sessions.deleteOne({[sessionId] : {'$exists':true}}).then(()=>{
-        res.setHeader('Set-Cookie',`session=;path=/;domain=${req.get('host')};expires=${dateJs("midnight 50 year ago").toUTCString()}`)
+        res.setHeader('Set-Cookie',`session=;path=/;domain=${req.hostname};expires=${dateJs("midnight 50 year ago").toUTCString()}`)
         res.redirect("/login")
     }).catch(()=>{
         console.log("Error logging out")
