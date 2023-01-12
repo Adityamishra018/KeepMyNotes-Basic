@@ -4,7 +4,6 @@ import dotenv from "dotenv"
 import path from "path"
 import { AuthApp, authorized } from "./auth.js"
 import bodyParser from "body-parser"
-import { rmSync } from "fs"
 
 dotenv.config()
 
@@ -25,7 +24,7 @@ counters.getNextNoteId = async function () {
 app.set("views", path.resolve("./views"))
 app.set("view engine", "ejs")
 
-app.use(express.static(path.dirname("./static")))
+app.use(express.static("."))
 app.use(AuthApp)
 
 app.get('/', (req, res) => {
@@ -36,6 +35,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/home', authorized, (req, res) => {
+    console.log(path.dirname("./static"))
+    console.log(path.resolve("./static"))
     res.render("home", { user: req.user, notes: req.notes})
 })
 
@@ -82,6 +83,4 @@ app.post('/edit',authorized,bodyParser.urlencoded({extended:false}),async (req,r
 })
 
 app.listen(3000)
-
 export default app
-
