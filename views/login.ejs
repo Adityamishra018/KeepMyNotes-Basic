@@ -2,9 +2,7 @@
     <div class="row d-flex align-items-center justify-content-center m-0" style="height: 100vh;">
         <div class="col-sm-4 px-3">
             <h1 class="display-4 mb-4">KeepMyNotes</h1>
-            <% if('msg' in this && msg != "") {%>
-                <small class="text-danger my-2 d-block"><%=msg%></small>
-            <%}%>
+            <small class="text-danger my-2 d-block"><%=msg%></small>
             <form action="/login" method="post">
                 <div class="form-group mb-3">
                     <label for="username">Username</label>

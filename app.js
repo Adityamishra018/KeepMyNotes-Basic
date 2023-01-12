@@ -29,14 +29,16 @@ app.use(AuthApp)
 
 app.get('/', (req, res) => {
     if (!req.headers.cookie)
-        res.render('login')
+        res.render('login',{msg:""})
     else
         res.redirect('home')
 })
 
+app.get('/login', authorized,(req, res) => {
+    res.redirect("/home")
+})
+
 app.get('/home', authorized, (req, res) => {
-    console.log(path.dirname("./static"))
-    console.log(path.resolve("./static"))
     res.render("home", { user: req.user, notes: req.notes})
 })
 

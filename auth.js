@@ -39,27 +39,26 @@ AuthApp.get('/login', (req, res) => {
 AuthApp.post('/login', bodyParser.urlencoded({ extended: false }), async (req, res) => {
     let uname = req.body.username
     let password = req.body.password
-
     //Authenticate
     if (uname && password) {
         let user = await users.findOne({ username: uname })
-        if (user && uname === user.username && bcrypt.compare(password, user.password)){
+        if (user && uname === user.username && await bcrypt.compare(password, user.password)){
             let sessionId = crypto.randomUUID()
             sessions.insertOne({
                 [sessionId] : user,
-                expires : dateJs("10 mins from now")
+                expires : dateJs("20 mins from now")
             }).then(()=>{
-                res.setHeader("Set-Cookie",`session=${sessionId};expires=${dateJs("10 mins from now").toUTCString()};HtppOnly`)
+                res.setHeader("Set-Cookie",`session=${sessionId};expires=${dateJs("20 mins from now").toUTCString()};HtppOnly`)
                 res.redirect("Home")
             }).catch(()=>{
                 res.status(500).send("Internal server error!")
             })
         }
         else
-            res.render("login", { msg: "Username or password is incorrect. Try again !" });
+            res.render("login", { msg: "Username or password incorrect" });
     }
     else {
-        res.status(400).send("Try again!")
+        res.render("login", { msg: "Try again !" });
     }
 })
 
@@ -69,7 +68,7 @@ AuthApp.get('/logout',authorized,async (req,res)=>{
         res.setHeader('Set-Cookie',`session=;path=/;expires=${dateJs("midnight 50 year ago").toUTCString()}`)
         res.redirect("/login")
     }).catch(()=>{
-        console.log("Error logging out")
+        console.log("FATAL ERROR!")
     })
 })
 
@@ -88,7 +87,7 @@ AuthApp.post('/register', bodyParser.urlencoded({ extended: false }), async (req
             username: uname,
             fname: fname,
             lname: lname,
-            password: await bcrypt.hash(password,1)
+            password: await bcrypt.hash(password,bcrypt.genSaltSync(1))
         }).then(() => {
             res.render("login", { msg: "Login with new username & password"})
         }).catch((err) => {
@@ -101,11 +100,10 @@ AuthApp.post('/register', bodyParser.urlencoded({ extended: false }), async (req
 
 async function clearSessions(){
     let removed = await sessions.deleteMany({expires : {$lte : dateJs("now")}})
-    console.log(removed)
 }
 
-//2 mins
-setInterval(clearSessions,1000*60*5)
+//clear expired sessions 10 mins
+setInterval(clearSessions,1000*60*20)
 
 export default AuthApp
 export {AuthApp,authorized}
