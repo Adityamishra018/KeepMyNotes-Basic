@@ -21,7 +21,7 @@
               <p class="card-text" style="overflow: clip;height: 4.5rem;"><%=notes[i].desc%></p>
               <div>
                 <a href="<%=`./edit/${user.username}/${notes[i].id}`%>"><button class="btn btn-primary">Edit</button></a>
-                <a href="#" ><button class="btn btn-danger">Delete</button></a>
+                <a href="#" ><button class="btn btn-warning">Delete</button></a>
               </div>
             </div>
           </div>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="row m-0">
-  <div class="col-xs-2 ps-3 "><a href="./add"><button class="btn btn-secondary">Add Item</button></a></div>
+  <div class="col-xs-2 ps-3 "><a href="./add"><button class="btn btn-success">Add Item</button></a></div>
 </div>
 
 <%- include("./layouts/_footer.ejs") %>
