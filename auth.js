@@ -41,7 +41,7 @@ AuthApp.post('/login', bodyParser.urlencoded({ extended: false }), async (req, r
     let password = req.body.password
     //Authenticate
     if (uname && password) {
-        let user = await users.findOne({ username: uname })
+        let user = await users.findOne({ username: uname.toLowerCase() })
         if (user && uname.toLowerCase() === user.username && await bcrypt.compare(password, user.password)){
             let sessionId = crypto.randomUUID()
             sessions.insertOne({
