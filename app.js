@@ -84,5 +84,16 @@ app.post('/edit',authorized,bodyParser.urlencoded({extended:false}),async (req,r
     }
 })
 
+app.post('/delete/:id',authorized,async (req,res)=>{
+    await notes.deleteOne({username : req.user.username,id : parseInt(req.params.id)}).then((ret)=>{
+        if(ret.deletedCount === 1){
+            res.status(200).redirect("/home")
+        }
+        else{
+            res.status(500).send("Something went wrong !")
+        }
+    })
+})
+
 app.listen(3000)
 export default app
