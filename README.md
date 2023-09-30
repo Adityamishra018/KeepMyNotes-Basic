@@ -5,13 +5,13 @@
 Note keeping app build using Express/Mongo and EJS (Server side rendered).
 The application has session based authentication and has been implemented in VanillaJS.
 
-##Concepts Covered
+## Concepts Covered
 
 - Session Based Auth
 - MongoDB
 - Express
 - EJS
 
-##Snaps
+## Snaps
 
-![HomePage](https://drive.google.com/file/d/1szI5D-Yfh-rcpggS2UWfKwfad0_7ce2m/view?usp=drive_link)
+![HomePage](https://drive.google.com/uc?export=view&id=1fBcUWmJzf11k9BmupuXBJcbexKU0092s)
