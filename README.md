@@ -11,6 +11,7 @@ The application has session based authentication and has been implemented in Van
 - MongoDB
 - Express
 - EJS
+- Bootstrap 5
 
 ## Snaps
 
